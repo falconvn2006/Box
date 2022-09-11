@@ -6,7 +6,12 @@ extern Box::Application* Box::CreateApplication();
 
 int main(int args, char** argv)
 {
-	printf("Welcome to Box Engine!\n");
+	Box::Log::Init();
+	BOX_CORE_WARN("Log Initialized!");
+	std::string msg = "World";
+	BOX_CLIENT_INFO("Hello {0}!", msg);
+
+	//printf("Welcome to Box Engine!\n");
 	auto app = Box::CreateApplication();
 	app->Run();
 	delete app;
