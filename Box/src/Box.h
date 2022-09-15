@@ -2,7 +2,6 @@
 
 // Only for linking
 
-#include <stdio.h>
 #include "Core/Application.h"
 #include "Core/Log.h"
 

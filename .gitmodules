@@ -1,3 +1,6 @@
 [submodule "Box/vendor/spdlog"]
 	path = Box/vendor/spdlog
 	url = https://github.com/gabime/spdlog
+[submodule "Box/vendor/GLFW"]
+	path = Box/vendor/GLFW
+	url = https://github.com/buckdan/glfw.git

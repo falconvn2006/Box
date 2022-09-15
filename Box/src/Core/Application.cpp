@@ -4,11 +4,13 @@
 #include "Events/ApplicationEvent.h"
 #include "Log.h"
 
+#include <GLFW/glfw3.h>
+
 namespace Box 
 {
 	Application::Application()
 	{
-
+		m_Window = std::unique_ptr<Window>(Window::Create());
 	}
 
 	Application::~Application()
@@ -18,9 +20,9 @@ namespace Box
 
 	void Application::Run() 
 	{
-		WindowResizeEvent e(1200, 720);
-		BOX_CLIENT_TRACE(e);
-
-		while (true);
+		while (m_Running) 
+		{
+			m_Window->OnUpdate();
+		}
 	}
 }
