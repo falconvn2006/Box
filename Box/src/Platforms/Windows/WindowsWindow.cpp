@@ -21,6 +21,13 @@ namespace Box
 		Shutdown();
 	}
 
+	void error_callback(int error, const char* msg) 
+	{
+		std::string s;
+		s = " [" + std::to_string(error) + "] " + msg + '\n';
+		BOX_CORE_ERROR(s);
+	}
+
 	void WindowsWindow::Init(const WindowProps& props) 
 	{
 		m_Data.Title = props.Title;
@@ -32,14 +39,21 @@ namespace Box
 		if (!s_GLFWInitialized) 
 		{
 			// TODO: glfw terminate on system shutdown
+
+			glfwSetErrorCallback(error_callback);
 			
 			int success = glfwInit();
+			//BOX_CORE_INFO(success);
 			BOX_CORE_ASSERT(success, "Could not initialize GLFW!")
 
 			s_GLFWInitialized = true;
 		}
 
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
+		if (m_Window == NULL) 
+		{
+			BOX_CORE_INFO("NULL");
+		}
 		glfwMakeContextCurrent(m_Window);
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVsync(true);

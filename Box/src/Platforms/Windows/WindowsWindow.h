@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Core/Window.h"
-#include "Core/Log.h"
+
+
 #include <GLFW/glfw3.h>
 
 namespace Box 
