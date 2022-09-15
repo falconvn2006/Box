@@ -18,6 +18,9 @@ project "Box"
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+	pchheader "bph.h"
+	pchsource "Box/src/bph.cpp"
+
 	files 
 	{
 		"%{prj.name}/src/**.h",
@@ -26,6 +29,7 @@ project "Box"
 
 	includedirs
 	{
+		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include"
 	}
 
