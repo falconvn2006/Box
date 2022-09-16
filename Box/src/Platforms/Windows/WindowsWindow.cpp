@@ -43,8 +43,12 @@ namespace Box
 			glfwSetErrorCallback(error_callback);
 			
 			int success = glfwInit();
+
 			//BOX_CORE_INFO(success);
 			BOX_CORE_ASSERT(success, "Could not initialize GLFW!")
+
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
 			s_GLFWInitialized = true;
 		}
