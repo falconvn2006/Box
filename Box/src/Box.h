@@ -2,8 +2,8 @@
 
 // For easier header import
 
-#include <stdio.h>
 #include "Box/Application.h"
+#include "Box/Log.h"
 
 //--------------- Entry point -----------------
 
