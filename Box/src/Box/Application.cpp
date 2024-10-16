@@ -1,3 +1,4 @@
+#include "boxpch.h"
 #include "Application.h"
 
 #include "Box/Events/ApplicationEvent.h"

@@ -1,6 +1,6 @@
 #pragma once
 #include "Event.h"
-#include <sstream>
+
 namespace Box {
 	class BOX_API MouseMovedEvent : public Event
 	{

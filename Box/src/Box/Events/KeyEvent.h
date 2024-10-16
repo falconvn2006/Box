@@ -1,6 +1,5 @@
 #pragma once
 #include "Event.h"
-#include <sstream>
 
 namespace Box {
 	class BOX_API KeyEvent : public Event
