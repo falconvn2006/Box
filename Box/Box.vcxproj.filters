@@ -7,6 +7,12 @@
     <Filter Include="Box\Events">
       <UniqueIdentifier>{92BEAD4C-7E76-EF99-E77D-C8F5D3548A8A}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{607753a6-547f-4817-b7e2-56ff00e6e91f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Windows">
+      <UniqueIdentifier>{9cfaa419-9ab7-4e85-a5a0-1ea04e698358}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Box.h" />
@@ -35,6 +41,8 @@
       <Filter>Box</Filter>
     </ClInclude>
     <ClInclude Include="src\boxpch.h" />
+    <ClInclude Include="src\Platform\WindowsWindow.h" />
+    <ClInclude Include="src\Box\Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Box\Application.cpp">
@@ -44,5 +52,6 @@
       <Filter>Box</Filter>
     </ClCompile>
     <ClCompile Include="src\boxpch.cpp" />
+    <ClCompile Include="src\Platform\WindowsWindow.cpp" />
   </ItemGroup>
 </Project>
