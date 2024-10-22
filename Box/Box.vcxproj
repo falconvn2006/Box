@@ -84,6 +84,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalOptions>/MDd %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -110,6 +111,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -137,6 +139,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -160,18 +163,22 @@
     <ClInclude Include="src\Box\Events\Event.h" />
     <ClInclude Include="src\Box\Events\KeyEvent.h" />
     <ClInclude Include="src\Box\Events\MouseEvent.h" />
+    <ClInclude Include="src\Box\Layer.h" />
+    <ClInclude Include="src\Box\LayerStack.h" />
     <ClInclude Include="src\Box\Log.h" />
-    <ClInclude Include="src\boxpch.h" />
     <ClInclude Include="src\Box\Window.h" />
     <ClInclude Include="src\Platform\WindowsWindow.h" />
+    <ClInclude Include="src\boxpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Box\Application.cpp" />
+    <ClCompile Include="src\Box\Layer.cpp" />
+    <ClCompile Include="src\Box\LayerStack.cpp" />
     <ClCompile Include="src\Box\Log.cpp" />
+    <ClCompile Include="src\Platform\WindowsWindow.cpp" />
     <ClCompile Include="src\boxpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\Platform\WindowsWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="vendor\GLFW\GLFW.vcxproj">

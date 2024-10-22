@@ -66,14 +66,17 @@ project "Box"
 
     filter "configurations:Debug"
         defines "BOX_DEBUG"
+        buildoptions "/MDd"
         symbols "On"
 
     filter "configurations:Release"
         defines "BOX_RELEASE"
+        buildoptions "/MD"
         optimize "On"
 
     filter "configurations:Dist"
         defines "BOX_DIST"
+        buildoptions "/MD"
         optimize "On"
 
 project "Sandbox"
@@ -114,12 +117,15 @@ project "Sandbox"
 
     filter "configurations:Debug"
         defines "BOX_DEBUG"
+        buildoptions "/MDd"
         symbols "On"
 
     filter "configurations:Release"
         defines "BOX_RELEASE"
+        buildoptions "/MD"
         optimize "On"
 
     filter "configurations:Dist"
         defines "BOX_DIST"
+        buildoptions "/MD"
         optimize "On"
