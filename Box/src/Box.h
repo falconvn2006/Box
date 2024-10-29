@@ -6,6 +6,8 @@
 #include "Box/Layer.h"
 #include "Box/Log.h"
 
+#include "Box/ImGui/ImGuiLayer.h"
+
 //--------------- Entry point -----------------
 
 #include "Box/Entrypoint.h"

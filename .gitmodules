@@ -4,3 +4,6 @@
 [submodule "Box/vendor/GLFW"]
 	path = Box/vendor/GLFW
 	url = https://github.com/falconvn2006/glfw
+[submodule "Box/vendor/imgui"]
+	path = Box/vendor/imgui
+	url = https://github.com/falconvn2006/imgui

@@ -4,6 +4,7 @@
 namespace Box {
 	class BOX_API KeyEvent : public Event
 	{
+
 	public:
 		inline int GetKeyCode() const { return m_KeyCode; }
 		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
@@ -12,6 +13,7 @@ namespace Box {
 			: m_KeyCode(keycode) {}
 		int m_KeyCode;
 	};
+
 	class BOX_API KeyPressedEvent : public KeyEvent
 	{
 	public:
@@ -28,6 +30,7 @@ namespace Box {
 	private:
 		int m_RepeatCount;
 	};
+
 	class BOX_API KeyReleasedEvent : public KeyEvent
 	{
 	public:
@@ -40,5 +43,20 @@ namespace Box {
 			return ss.str();
 		}
 		EVENT_CLASS_TYPE(KeyReleased)
+	};
+
+	class BOX_API KeyTypedEvent : public KeyEvent
+	{
+	public:
+		KeyTypedEvent(int keycode)
+			: KeyEvent(keycode) {}
+		std::string ToString() const override
+		{
+			std::stringstream ss;
+			ss << "KeyTypedEvent: " << m_KeyCode;
+			return ss.str();
+		}
+		EVENT_CLASS_TYPE(KeyTyped)
+	private:
 	};
 }
