@@ -17,6 +17,7 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "Box/vendor/GLFW/include"
 IncludeDir["Glad"] = "Box/vendor/Glad/include"
 IncludeDir["ImGui"] = "Box/vendor/imgui/"
+IncludeDir["glm"] = "Box/vendor/glm/"
 
 include "Box/vendor/GLFW"
 include "Box/vendor/Glad"
@@ -38,6 +39,8 @@ project "Box"
     {
         "%{prj.name}/src/**.h",
         "%{prj.name}/src/**.cpp",
+        "%{prj.name}/vendor/glm/glm/**.hpp",
+        "%{prj.name}/vendor/glm/glm/**.inl"
     }
 
     includedirs
@@ -46,7 +49,8 @@ project "Box"
         "%{prj.name}/src",
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.Glad}",
-        "%{IncludeDir.ImGui}"
+        "%{IncludeDir.ImGui}",
+        "%{IncludeDir.glm}"
     }
 
     links
@@ -107,7 +111,8 @@ project "Sandbox"
     includedirs
     {
         "Box/vendor/spdlog/include",
-        "Box/src"
+        "Box/src",
+        "%{IncludeDir.glm}"
     }
 
     filter "system:windows"
