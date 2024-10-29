@@ -25,9 +25,12 @@ namespace Box
 		bool OnMouseMovedEvent(MouseMovedEvent& e);
 		bool OnMouseScrolledEvent(MouseScrolledEvent& e);
 
+		// Key events
 		bool OnKeyPressedEvent(KeyPressedEvent& e);
 		bool OnKeyReleasedEvent(KeyReleasedEvent& e);
 		bool OnKeyTypedEvent(KeyTypedEvent& e);
+
+		// Other events
 		bool OnWindowResizedEvent(WindowResizeEvent& e);
 
 	private:
