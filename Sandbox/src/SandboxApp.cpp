@@ -7,12 +7,18 @@ public:
 
 	void OnUpdate() override
 	{
-		BOX_INFO("ExampleLayer::Update");
+		/*BOX_INFO("ExampleLayer::Update");*/
 	}
 
 	void OnEvent(Box::Event& event) override
 	{
-		BOX_TRACE("{0}", event.ToString());
+		/*BOX_TRACE("{0}", event.ToString());*/
+
+		if (event.GetEventType() == Box::EventType::KeyPressed)
+		{
+			Box::KeyPressedEvent& e = (Box::KeyPressedEvent&)event;
+			BOX_TRACE("{0}", (char)e.GetKeyCode());
+		}
 	}
 };
 

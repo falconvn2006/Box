@@ -5,7 +5,6 @@
 #include "Box/Log.h"
 #include "Box/Input.h"
 
-#include <GLFW/glfw3.h>
 #include <glad/glad.h>
 
 namespace Box {
@@ -42,7 +41,7 @@ namespace Box {
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BOX_BIND_EVENT_FN(Application::OnWindowClose));
 
-		BOX_CORE_TRACE("{0}", e.ToString());
+		/*BOX_CORE_TRACE("{0}", e.ToString());*/
 
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); )
 		{
@@ -63,8 +62,8 @@ namespace Box {
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
 
-			auto [x, y] = Input::GetMousePosition();
-			BOX_CORE_TRACE("{0}, {1}", x, y);
+			/*auto [x, y] = Input::GetMousePosition();
+			BOX_CORE_TRACE("{0}, {1}", x, y);*/
 
 			m_Window->OnUpdate();
 		}
