@@ -10,6 +10,10 @@
 	#error Box only support windows
 #endif
 
+#ifdef BOX_DEBUG
+	#define BOX_ENABLE_ASSERTS
+#endif
+
 #ifdef BOX_ENABLE_ASSERTS
 	#define BOX_ASSERT(x, ...) { if(!(x)) { BOX_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
 	#define BOX_CORE_ASSERT(x, ...) { if(!(x)) { BOX_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak();  } }
