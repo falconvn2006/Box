@@ -6,6 +6,8 @@
 #include "Box/Events/ApplicationEvent.h"
 #include "Window.h"
 
+#include "Box/ImGui/ImGuiLayer.h"
+
 namespace Box {
 	class BOX_API Application {
 
@@ -27,6 +29,7 @@ namespace Box {
 		bool OnWindowClose(WindowCloseEvent& e);
 
 		std::unique_ptr<Window> m_Window;
+		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 
