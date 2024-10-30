@@ -111,6 +111,7 @@ project "Sandbox"
     includedirs
     {
         "Box/vendor/spdlog/include",
+        "Box/vendor/",
         "Box/src",
         "%{IncludeDir.glm}"
     }

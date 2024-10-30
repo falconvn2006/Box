@@ -1,4 +1,5 @@
 #include<Box.h>
+#include "imgui/imgui.h"
 
 class ExampleLayer : public Box::Layer
 {
@@ -8,6 +9,13 @@ public:
 	void OnUpdate() override
 	{
 		/*BOX_INFO("ExampleLayer::Update");*/
+	}
+
+	virtual void OnImGuiRender() override
+	{
+		ImGui::Begin("Test");
+		ImGui::Text("Hello World!");
+		ImGui::End();
 	}
 
 	void OnEvent(Box::Event& event) override
