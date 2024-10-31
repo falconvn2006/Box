@@ -1,11 +1,15 @@
 #pragma once
 
 #ifdef BOX_PLATFORM_WINDOWS
+#if BOX_DYNAMIC_LINK
 	#ifdef BOX_BUILD_DLL
 		#define BOX_API __declspec(dllexport)
 	#else
 		#define BOX_API __declspec(dllimport)
 	#endif // BOX_BUILD_DLL
+#else
+	#define BOX_API
+#endif
 #else
 	#error Box only support windows
 #endif

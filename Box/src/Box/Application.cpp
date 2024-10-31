@@ -59,7 +59,7 @@ namespace Box {
 	{
 		while (m_Running)
 		{
-			glClearColor(0.55, 0.197, 0.175, 1);
+			glClearColor((GLfloat)0.55, (GLfloat)0.197, (GLfloat)0.175, (GLfloat)1);
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			for (Layer* layer : m_LayerStack)
