@@ -11,12 +11,12 @@ public:
 		/*BOX_INFO("ExampleLayer::Update");*/
 	}
 
-	virtual void OnImGuiRender() override
+	/*void OnImGuiRender() override
 	{
 		ImGui::Begin("Test");
 		ImGui::Text("Hello World!");
 		ImGui::End();
-	}
+	}*/
 
 	void OnEvent(Box::Event& event) override
 	{

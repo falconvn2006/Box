@@ -127,7 +127,8 @@ project "Sandbox"
 
     links
     {
-        "Box"
+        "Box",
+        --"ImGui"
     }
 
     filter "configurations:Debug"
