@@ -20,6 +20,8 @@ namespace Box
 		glfwMakeContextCurrent(m_windowHandle);
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		BOX_CORE_ASSERT(status, "Failed to initialize Glad!");
+
+		BOX_CORE_INFO("OpenGL Info: {0} | Renderer : {1} | Version : {2}", (const char*)glGetString(GL_VENDOR), (const char*)glGetString(GL_RENDERER), (const char*)glGetString(GL_VERSION));
 	}
 
 	void OpenGLContext::SwapBuffers()
