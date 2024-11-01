@@ -27,10 +27,22 @@ namespace Box {
 		glGenBuffers(1, &m_VertexBuffer);
 		glBindBuffer(GL_ARRAY_BUFFER, m_VertexBuffer);
 
-		float vertices[3 * 3] = {
+		// vertices[3dCords, verticesAmount]
+		// vertices index is import. It will render strictly by it
+
+		// Vertices for a Triangle
+		/*float vertices[3 * 3] = {
 			-0.5f, -0.5f, 0.0f,
 			0.5f, -0.5f, 0.0f,
 			0.0f, 0.5f, 0.0f
+		};*/
+
+		// Vertices for a Square/Rectangle
+		float vertices[3 * 4] = {
+			-0.5f, -0.5f, 0.0f,
+			0.5f, -0.5f, 0.0f,
+			0.5f, 0.5f, 0.0f,
+			-0.5f, 0.5f, 0.0f,
 		};
 
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
@@ -41,7 +53,8 @@ namespace Box {
 		glGenBuffers(1, &m_IndexBuffer);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBuffer);
 
-		unsigned int indices[3] = { 0, 1, 2 };
+		/*unsigned int indices[3] = { 0, 1, 2 };*/
+		unsigned int indices[4] = { 0, 1, 2, 3 };
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 	}
 
@@ -86,7 +99,8 @@ namespace Box {
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			glBindVertexArray(m_VertexArray);
-			glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
+			/*glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);*/
+			glDrawElements(GL_POLYGON, 4, GL_UNSIGNED_INT, nullptr);
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
