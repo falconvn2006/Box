@@ -1,5 +1,7 @@
 #pragma once
 #include "Box/Window.h"
+#include "Box/Renderer/GraphicsContext.h"
+
 #include <GLFW/glfw3.h>
 
 namespace Box 
@@ -28,6 +30,7 @@ namespace Box
 
 	private:
 		GLFWwindow* m_Window;
+		GraphicsContext* m_Context;
 
 		struct WindowData
 		{
