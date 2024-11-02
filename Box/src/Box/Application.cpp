@@ -24,9 +24,6 @@ namespace Box {
 		glGenVertexArrays(1, &m_VertexArray);
 		glBindVertexArray(m_VertexArray);
 
-		glGenBuffers(1, &m_VertexBuffer);
-		glBindBuffer(GL_ARRAY_BUFFER, m_VertexBuffer);
-
 		// vertices[3dCords, verticesAmount]
 		// vertices index is import. It will render strictly by it
 
@@ -45,17 +42,14 @@ namespace Box {
 			-0.5f, 0.5f, 0.0f,
 		};
 
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+		m_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
 
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GL_FLOAT), nullptr);
 
-		glGenBuffers(1, &m_IndexBuffer);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBuffer);
-
 		/*unsigned int indices[3] = { 0, 1, 2 };*/
-		unsigned int indices[4] = { 0, 1, 2, 3 };
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+		uint32_t indices[4] = { 0, 1, 2, 3 };
+		m_IndexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t) ));
 
 		std::string vertexSource = R"(
 			#version 330 core
@@ -130,7 +124,7 @@ namespace Box {
 			m_Shader->Bind();
 			glBindVertexArray(m_VertexArray);
 			/*glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);*/
-			glDrawElements(GL_POLYGON, 4, GL_UNSIGNED_INT, nullptr);
+			glDrawElements(GL_POLYGON, m_IndexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
