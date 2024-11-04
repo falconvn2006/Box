@@ -146,6 +146,7 @@
     <ClInclude Include="src\Box\Renderer\Renderer.h" />
     <ClInclude Include="src\Box\Renderer\Buffer.h" />
     <ClInclude Include="src\Box\Renderer\Shader.h" />
+    <ClInclude Include="src\Box\Renderer\VertexArray.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Box.h" />
@@ -165,6 +166,7 @@
     <ClInclude Include="src\Box\MouseButtonCodes.h" />
     <ClInclude Include="src\Box\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Box\Window.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\boxpch.h" />
@@ -589,6 +591,7 @@
     <ClCompile Include="src\Box\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Box\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Box\Renderer\Shader.cpp" />
+    <ClCompile Include="src\Box\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Box\Application.cpp" />
@@ -597,6 +600,7 @@
     <ClCompile Include="src\Box\Layer.cpp" />
     <ClCompile Include="src\Box\LayerStack.cpp" />
     <ClCompile Include="src\Box\Log.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\boxpch.cpp">
