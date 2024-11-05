@@ -20,7 +20,7 @@ namespace Box
 		}
 	};
 
-	class BOX_API Window
+	class Window
 	{
 	public:
 		using EventCallbackFn = std::function<void(Event&)>;

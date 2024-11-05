@@ -2,7 +2,7 @@
 #include "Event.h"
 
 namespace Box {
-	class BOX_API KeyEvent : public Event
+	class KeyEvent : public Event
 	{
 
 	public:
@@ -14,7 +14,7 @@ namespace Box {
 		int m_KeyCode;
 	};
 
-	class BOX_API KeyPressedEvent : public KeyEvent
+	class KeyPressedEvent : public KeyEvent
 	{
 	public:
 		KeyPressedEvent(int keycode, int repeatCount)
@@ -31,7 +31,7 @@ namespace Box {
 		int m_RepeatCount;
 	};
 
-	class BOX_API KeyReleasedEvent : public KeyEvent
+	class KeyReleasedEvent : public KeyEvent
 	{
 	public:
 		KeyReleasedEvent(int keycode)
@@ -45,7 +45,7 @@ namespace Box {
 		EVENT_CLASS_TYPE(KeyReleased)
 	};
 
-	class BOX_API KeyTypedEvent : public KeyEvent
+	class KeyTypedEvent : public KeyEvent
 	{
 	public:
 		KeyTypedEvent(int keycode)

@@ -8,15 +8,8 @@
 
 #include "Box/ImGui/ImGuiLayer.h"
 
-// Temporary
-#include "Box/Renderer/Shader.h"
-#include "Box/Renderer/Buffer.h"
-#include "Box/Renderer/VertexArray.h"
-
-#include "Box/Renderer/OrthographicCamera.h"
-
 namespace Box {
-	class BOX_API Application {
+	class Application {
 
 	public:
 		Application();

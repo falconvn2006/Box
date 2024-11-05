@@ -7,7 +7,7 @@
 
 namespace Box 
 {
-	class BOX_API LayerStack
+	class LayerStack
 	{
 	public:
 		LayerStack();

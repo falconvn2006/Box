@@ -42,8 +42,6 @@ namespace Box {
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BOX_BIND_EVENT_FN(Application::OnWindowClose));
 
-		/*BOX_CORE_TRACE("{0}", e.ToString());*/
-
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); )
 		{
 			(*--it)->OnEvent(e);
