@@ -11,6 +11,15 @@
 
 #include "Box/ImGui/ImGuiLayer.h"
 
+#include "Box/Renderer/Renderer.h"
+#include "Box/Renderer/RenderCommand.h"
+
+#include "Box/Renderer/Buffer.h"
+#include "Box/Renderer/VertexArray.h"
+#include "Box/Renderer/Shader.h"
+
+#include "Box/Renderer/OrthographicCamera.h"
+
 //--------------- Entry point -----------------
 
 #include "Box/Entrypoint.h"
