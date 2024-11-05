@@ -1,20 +1,18 @@
 #pragma once
 
+#include "RenderCommand.h"
+
 namespace Box
 {
-	enum RendererAPI
-	{
-		None = 0, OpenGL = 1
-	};
-
 	class Renderer
 	{
 	public:
-		// Get the current API at the runtime
-		inline static RendererAPI GetAPI() { return s_RendererAPI; };
+		static void BeginScene();
+		static void EndScene();
 
-		// TODO: Maybe implement a SetAPI function
-	private:
-		static RendererAPI s_RendererAPI;
+		static void Submit(const std::shared_ptr<VertexArray>& vertexArray);
+
+		// Get the current API at the runtime
+		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); };
 	};
 }

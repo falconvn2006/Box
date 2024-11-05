@@ -5,7 +5,7 @@
 #include "Box/Log.h"
 #include "Box/Input.h"
 
-#include <glad/glad.h>
+#include "Box/Renderer/Renderer.h"
 
 namespace Box {
 	Application* Application::s_Instance = nullptr;
@@ -169,16 +169,18 @@ namespace Box {
 	{
 		while (m_Running)
 		{
-			glClearColor((GLfloat)0.55, (GLfloat)0.197, (GLfloat)0.175, (GLfloat)1);
-			glClear(GL_COLOR_BUFFER_BIT);
+			RenderCommand::SetClearColor({ 0.55, 0.197, 0.175, 1 });
+			RenderCommand::Clear();
+
+			Renderer::BeginScene();
 
 			m_BlueShader->Bind();
-			m_SquareVertexArray->Bind();
-			glDrawElements(GL_TRIANGLES, m_SquareVertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			Renderer::Submit(m_SquareVertexArray);
 
 			m_Shader->Bind();
-			m_VertexArray->Bind();
-			glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			Renderer::Submit(m_VertexArray);
+
+			Renderer::EndScene();
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
