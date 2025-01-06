@@ -93,7 +93,7 @@ public:
 
 		m_Shader.reset(new Box::Shader(vertexSource, fragmentSource));
 
-		std::string blueVertexSource = R"(
+		std::string flatColorVertexSource = R"(
 			#version 330 core
 			
 			layout(location = 0) in vec3 a_Position;
@@ -110,20 +110,22 @@ public:
 			}
 		)";
 
-		std::string blueFragmentSource = R"(
+		std::string flatColorFragmentSource = R"(
 			#version 330 core
 			
 			layout(location = 0) out vec4 color;
 
 			in vec3 v_Position;
 
+			uniform vec4 u_Color;
+
 			void main()
 			{
-				color = vec4(0.2, 0.3, 0.8, 1.0); 
+				color = u_Color; 
 			}
 		)";
 
-		m_BlueShader.reset(new Box::Shader(blueVertexSource, blueFragmentSource));
+		m_FlatColorShader.reset(new Box::Shader(flatColorVertexSource, flatColorFragmentSource));
 	}
 
 	void OnUpdate(Box::TimeStep ts) override
@@ -147,7 +149,8 @@ public:
 		else if (Box::Input::IsKeyPressed(BOX_KEY_E))
 			m_Rotation += m_CameraRotationSpeed * ts;
 
-		Box::RenderCommand::SetClearColor({ 0.55, 0.197, 0.175, 1 });
+		// Seting the background color
+		Box::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		Box::RenderCommand::Clear();
 
 		m_Camera.SetRotation(m_Rotation);
@@ -157,13 +160,23 @@ public:
 
 		static glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
+		// Seting the color to test the shader
+		glm::vec4 redColor(0.8f, 0.2f, 0.3f, 1.0f);
+		glm::vec4 blueColor(0.2f, 0.3f, 0.8f, 1.0f);
+
 		for (int y = 0; y < 20; y++)
 		{
 			for (int x = 0; x < 20; x++)
 			{
 				glm::vec3 position(x * 0.11f, y * 0.11f, 0.0f);
 				glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * scale;
-				Box::Renderer::Submit(m_BlueShader, m_SquareVertexArray, transform);
+
+				if (x % 2 == 0)
+					m_FlatColorShader->UploadUniformFloat4("u_Color", redColor);
+				else
+					m_FlatColorShader->UploadUniformFloat4("u_Color", blueColor);
+
+				Box::Renderer::Submit(m_FlatColorShader, m_SquareVertexArray, transform);
 			}
 		}
 
@@ -203,7 +216,7 @@ private:
 	std::shared_ptr<Box::Shader> m_Shader;
 	std::shared_ptr<Box::VertexArray> m_VertexArray;
 
-	std::shared_ptr<Box::Shader> m_BlueShader;
+	std::shared_ptr<Box::Shader> m_FlatColorShader;
 	std::shared_ptr<Box::VertexArray> m_SquareVertexArray;
 
 	Box::OrthographicCamera m_Camera;
