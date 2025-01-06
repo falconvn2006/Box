@@ -122,22 +122,25 @@ public:
 		m_BlueShader.reset(new Box::Shader(blueVertexSource, blueFragmentSource));
 	}
 
-	void OnUpdate() override
+	void OnUpdate(Box::TimeStep ts) override
 	{
+		/*BOX_TRACE("Delta time: {0}s ({1}ms)", ts.GetSeconds(), ts.GetMiliSeconds());*/
+		m_TimeStep = ts;
+
 		if (Box::Input::IsKeyPressed(BOX_KEY_LEFT))
-			m_CameraPosition.x -= m_CameraSpeed;
+			m_CameraPosition.x -= m_CameraSpeed * ts;
 		else if (Box::Input::IsKeyPressed(BOX_KEY_RIGHT))
-			m_CameraPosition.x += m_CameraSpeed;
+			m_CameraPosition.x += m_CameraSpeed * ts;
 
 		if (Box::Input::IsKeyPressed(BOX_KEY_UP))
-			m_CameraPosition.y += m_CameraSpeed;
+			m_CameraPosition.y += m_CameraSpeed * ts;
 		else if (Box::Input::IsKeyPressed(BOX_KEY_DOWN))
-			m_CameraPosition.y -= m_CameraSpeed;
+			m_CameraPosition.y -= m_CameraSpeed * ts;
 
-		if (Box::Input::IsKeyPressed(BOX_KEY_R))
-			m_Rotation -= m_CameraRotationSpeed;
+		if (Box::Input::IsKeyPressed(BOX_KEY_Q))
+			m_Rotation -= m_CameraRotationSpeed * ts;
 		else if (Box::Input::IsKeyPressed(BOX_KEY_E))
-			m_Rotation += m_CameraRotationSpeed;
+			m_Rotation += m_CameraRotationSpeed * ts;
 
 		Box::RenderCommand::SetClearColor({ 0.55, 0.197, 0.175, 1 });
 		Box::RenderCommand::Clear();
@@ -151,15 +154,33 @@ public:
 		Box::Renderer::Submit(m_Shader, m_VertexArray);
 
 		Box::Renderer::EndScene();
+
+		if(m_Toogle)
+			m_Rotation += m_CameraRotationSpeed * 100;
 	}
 
 	void OnImGuiRender() override
 	{
-		
+		ImGui::Begin("Debug Info");
+
+		ImGui::Text("Delta Time: %.3fs (%.3fms)", m_TimeStep, m_TimeStep*1000.0f);
+
+		ImGui::End();
 	}
 
 	void OnEvent(Box::Event& event) override
 	{
+		if (event.GetEventType() == Box::EventType::KeyPressed)
+		{
+			Box::KeyPressedEvent& e = (Box::KeyPressedEvent&)event;
+			if (e.GetKeyCode() == BOX_KEY_P)
+			{
+				if (m_Toogle)
+					m_Toogle = false;
+				else
+					m_Toogle = true;
+			}
+		}
 	}
 
 private:
@@ -170,11 +191,16 @@ private:
 	std::shared_ptr<Box::VertexArray> m_SquareVertexArray;
 
 	Box::OrthographicCamera m_Camera;
+	
 	glm::vec3 m_CameraPosition;
-
 	float m_Rotation = 0.0f;
-	float m_CameraSpeed = 0.1f;
-	float m_CameraRotationSpeed = 0.2f;
+
+	float m_CameraSpeed = 1.0f;
+	float m_CameraRotationSpeed = 180.0f;
+
+	float m_TimeStep;
+
+	bool m_Toogle = false;
 };
 
 class Sandbox : public Box::Application

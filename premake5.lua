@@ -142,6 +142,8 @@ project "Sandbox"
         optimize "on"
 
     filter "configurations:Dist"
+        kind "WindowedApp"
         defines "BOX_DIST"
         runtime "Release"
         optimize "on"
+        symbols "off"

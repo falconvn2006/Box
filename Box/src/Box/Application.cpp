@@ -5,6 +5,8 @@
 #include "Box/Input.h"
 #include "Box/Renderer/Renderer.h"
 
+#include <GLFW/glfw3.h>
+
 namespace Box {
 	Application* Application::s_Instance = nullptr;
 
@@ -55,8 +57,13 @@ namespace Box {
 	{
 		while (m_Running)
 		{
+			// TODO: Implement a way to get the time independently for each platform
+			float time = (float)glfwGetTime();
+			TimeStep timestep = time - m_LastFrameTime;
+			m_LastFrameTime = time;
+
 			for (Layer* layer : m_LayerStack)
-				layer->OnUpdate();
+				layer->OnUpdate(timestep);
 
 			m_ImGuiLayer->Begin();
 			for (Layer* layer : m_LayerStack)

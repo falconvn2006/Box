@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Box/Core.h"
+#include "Box/Core/Timestep.h"
 #include "Box/Events/Event.h"
 
 namespace Box {
@@ -12,7 +13,7 @@ namespace Box {
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
-		virtual void OnUpdate() {}
+		virtual void OnUpdate(TimeStep ts) {}
 		virtual void OnImGuiRender() {}
 		virtual void OnEvent(Event& e) {}
 

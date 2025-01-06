@@ -4,6 +4,9 @@
 #include "Box/LayerStack.h"
 #include "Box/Events/Event.h"
 #include "Box/Events/ApplicationEvent.h"
+
+#include "Box/Core/Timestep.h"
+
 #include "Window.h"
 
 #include "Box/ImGui/ImGuiLayer.h"
@@ -27,11 +30,14 @@ namespace Box {
 		inline Window& GetWindow() { return *m_Window; }
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
-
+	
+	private:
 		std::unique_ptr<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
+		float m_LastFrameTime = 0.0f;
+
 	private:
 		static Application* s_Instance;
 	};

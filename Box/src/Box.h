@@ -5,6 +5,9 @@
 #include "Box/Application.h"
 #include "Box/Layer.h"
 #include "Box/Log.h"
+
+#include "Box/Core/Timestep.h"
+
 #include "Box/Input.h"
 #include "Box/KeyCodes.h"
 #include "Box/MouseButtonCodes.h"
