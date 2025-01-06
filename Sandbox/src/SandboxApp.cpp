@@ -1,11 +1,13 @@
 #include<Box.h>
 #include "imgui/imgui.h"
 
+#include <glm/gtc/matrix_transform.hpp>
+
 class ExampleLayer : public Box::Layer
 {
 public:
-	ExampleLayer() 
-		: m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0.0f), Layer("Example")
+	ExampleLayer()
+		: Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0.0f)
 	{
 		m_VertexArray.reset(Box::VertexArray::Create());
 
@@ -36,10 +38,10 @@ public:
 		m_SquareVertexArray.reset(Box::VertexArray::Create());
 
 		float squareVertices[3 * 4] = {
-			-0.75f, -0.75f, 0.0f,
-			0.75f, -0.75f, 0.0f,
-			0.75f, 0.75f, 0.0f,
-			-0.75f, 0.75f, 0.0f,
+			-0.5f, -0.5f, 0.0f,
+			0.5f, -0.5f, 0.0f,
+			0.5f, 0.5f, 0.0f,
+			-0.5f, 0.5f, 0.0f,
 		};
 
 		std::shared_ptr<Box::VertexBuffer> squareVertexBuffer;
@@ -61,6 +63,7 @@ public:
 			layout(location = 1) in vec4 a_Color;
 
 			uniform mat4 u_ProjectionView;
+			uniform mat4 u_Transform;
 
 			out vec3 v_Position;
 			out vec4 v_Color;
@@ -69,7 +72,7 @@ public:
 			{
 				v_Position = a_Position;
 				v_Color = a_Color;
-				gl_Position = u_ProjectionView * vec4(a_Position, 1.0);
+				gl_Position = u_ProjectionView * u_Transform * vec4(a_Position, 1.0);
 			}
 		)";
 
@@ -96,13 +99,14 @@ public:
 			layout(location = 0) in vec3 a_Position;
 
 			uniform mat4 u_ProjectionView;
+			uniform mat4 u_Transform;
 
 			out vec3 v_Position;
 
 			void main()
 			{
 				v_Position = a_Position;
-				gl_Position = u_ProjectionView * vec4(a_Position, 1.0);
+				gl_Position = u_ProjectionView * u_Transform * vec4(a_Position, 1.0);
 			}
 		)";
 
@@ -127,6 +131,7 @@ public:
 		/*BOX_TRACE("Delta time: {0}s ({1}ms)", ts.GetSeconds(), ts.GetMiliSeconds());*/
 		m_TimeStep = ts;
 
+		// Camera Controls
 		if (Box::Input::IsKeyPressed(BOX_KEY_LEFT))
 			m_CameraPosition.x -= m_CameraSpeed * ts;
 		else if (Box::Input::IsKeyPressed(BOX_KEY_RIGHT))
@@ -150,7 +155,18 @@ public:
 
 		Box::Renderer::BeginScene(m_Camera);
 
-		Box::Renderer::Submit(m_BlueShader, m_SquareVertexArray);
+		static glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+
+		for (int y = 0; y < 20; y++)
+		{
+			for (int x = 0; x < 20; x++)
+			{
+				glm::vec3 position(x * 0.11f, y * 0.11f, 0.0f);
+				glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * scale;
+				Box::Renderer::Submit(m_BlueShader, m_SquareVertexArray, transform);
+			}
+		}
+
 		Box::Renderer::Submit(m_Shader, m_VertexArray);
 
 		Box::Renderer::EndScene();
@@ -195,7 +211,7 @@ private:
 	glm::vec3 m_CameraPosition;
 	float m_Rotation = 0.0f;
 
-	float m_CameraSpeed = 1.0f;
+	float m_CameraSpeed = 5.0f;
 	float m_CameraRotationSpeed = 180.0f;
 
 	float m_TimeStep;
