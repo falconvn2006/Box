@@ -23,7 +23,7 @@ public:
 			0.0f, 0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f
 		};
 
-		std::shared_ptr<Box::VertexBuffer> vertexBuffer;
+		Box::Ref<Box::VertexBuffer> vertexBuffer;
 		vertexBuffer.reset(Box::VertexBuffer::Create(vertices, sizeof(vertices)));
 		Box::BufferLayout layout = {
 			{ Box::ShaderDataType::Float3, "a_Position"},
@@ -32,7 +32,7 @@ public:
 		vertexBuffer->SetLayout(layout);
 		m_VertexArray->AddVertexBuffer(vertexBuffer);
 
-		std::shared_ptr<Box::IndexBuffer> indexBuffer;
+		Box::Ref<Box::IndexBuffer> indexBuffer;
 		unsigned int indices[3] = { 0, 1, 2 };
 		indexBuffer.reset(Box::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
@@ -47,7 +47,7 @@ public:
 			-0.5f, 0.5f, 0.0f,
 		};
 
-		std::shared_ptr<Box::VertexBuffer> squareVertexBuffer;
+		Box::Ref<Box::VertexBuffer> squareVertexBuffer;
 		squareVertexBuffer.reset(Box::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 		squareVertexBuffer->SetLayout({
 			{ Box::ShaderDataType::Float3, "a_Position"}
@@ -55,7 +55,7 @@ public:
 		m_SquareVertexArray->AddVertexBuffer(squareVertexBuffer);
 
 		unsigned int squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-		std::shared_ptr<Box::IndexBuffer> squareIndexBuffer;
+		Box::Ref<Box::IndexBuffer> squareIndexBuffer;
 		squareIndexBuffer.reset(Box::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 		m_SquareVertexArray->SetIndexBuffer(squareIndexBuffer);
 
@@ -212,11 +212,11 @@ public:
 	}
 
 private:
-	std::shared_ptr<Box::Shader> m_Shader;
-	std::shared_ptr<Box::VertexArray> m_VertexArray;
+	Box::Ref<Box::Shader> m_Shader;
+	Box::Ref<Box::VertexArray> m_VertexArray;
 
-	std::shared_ptr<Box::Shader> m_FlatColorShader;
-	std::shared_ptr<Box::VertexArray> m_SquareVertexArray;
+	Box::Ref<Box::Shader> m_FlatColorShader;
+	Box::Ref<Box::VertexArray> m_SquareVertexArray;
 
 	Box::OrthographicCamera m_Camera;
 	
