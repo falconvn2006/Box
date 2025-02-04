@@ -16,8 +16,9 @@ outputdir = "%{cfg.buildcfg}.%{cfg.system}.%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"] = "Box/vendor/GLFW/include"
 IncludeDir["Glad"] = "Box/vendor/Glad/include"
-IncludeDir["ImGui"] = "Box/vendor/imgui/"
-IncludeDir["glm"] = "Box/vendor/glm/"
+IncludeDir["ImGui"] = "Box/vendor/imgui"
+IncludeDir["glm"] = "Box/vendor/glm"
+IncludeDir["stb_image"] = "Box/vendor/stb_image"
 
 include "Box/vendor/GLFW"
 include "Box/vendor/Glad"
@@ -40,6 +41,8 @@ project "Box"
     {
         "%{prj.name}/src/**.h",
         "%{prj.name}/src/**.cpp",
+        "%{prj.name}/vendor/stb_image/**.h",
+        "%{prj.name}/vendor/stb_image/**.cpp",
         "%{prj.name}/vendor/glm/glm/**.hpp",
         "%{prj.name}/vendor/glm/glm/**.inl"
     }
@@ -51,7 +54,8 @@ project "Box"
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.Glad}",
         "%{IncludeDir.ImGui}",
-        "%{IncludeDir.glm}"
+        "%{IncludeDir.glm}",
+        "%{IncludeDir.stb_image}"
     }
 
     defines

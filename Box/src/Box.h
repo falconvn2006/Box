@@ -20,6 +20,7 @@
 #include "Box/Renderer/Buffer.h"
 #include "Box/Renderer/VertexArray.h"
 #include "Box/Renderer/Shader.h"
+#include "Box/Renderer/Texture.h"
 
 #include "Box/Renderer/OrthographicCamera.h"
 
