@@ -168,6 +168,7 @@ public:
 		m_TextureShader.reset(Box::Shader::Create(textureVertexSource, textureFragmentSource));
 
 		m_Texture = Box::Texture2D::Create("assets/textures/Checkerboard.png");
+		m_ChernoTexture = Box::Texture2D::Create("assets/textures/ChernoLogo.png");
 
 		std::dynamic_pointer_cast<Box::OpenGLShader>(m_TextureShader)->Bind();
 		std::dynamic_pointer_cast<Box::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
@@ -222,6 +223,9 @@ public:
 		m_Texture->Bind();
 		Box::Renderer::Submit(m_TextureShader, m_SquareVertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
+		m_ChernoTexture->Bind();
+		Box::Renderer::Submit(m_TextureShader, m_SquareVertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+
 		// Triangle rendering
 		/*Box::Renderer::Submit(m_Shader, m_VertexArray);*/
 
@@ -264,7 +268,7 @@ private:
 	Box::Ref<Box::Shader> m_FlatColorShader, m_TextureShader;
 	Box::Ref<Box::VertexArray> m_SquareVertexArray;
 
-	Box::Ref<Box::Texture2D> m_Texture;
+	Box::Ref<Box::Texture2D> m_Texture, m_ChernoTexture;
 
 	Box::OrthographicCamera m_Camera;
 	
