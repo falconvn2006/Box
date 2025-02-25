@@ -95,7 +95,7 @@ public:
 			}
 		)";
 
-		m_Shader.reset(Box::Shader::Create(vertexSource, fragmentSource));
+		m_Shader = Box::Shader::Create("VertexColorTriangle", vertexSource, fragmentSource);
 
 		std::string flatColorVertexSource = R"(
 			#version 330 core
@@ -129,15 +129,15 @@ public:
 			}
 		)";
 
-		m_FlatColorShader.reset(Box::Shader::Create(flatColorVertexSource, flatColorFragmentSource));
+		m_FlatColorShader = Box::Shader::Create("FlatColorVertexShader", flatColorVertexSource, flatColorFragmentSource);
 
-		m_TextureShader.reset(Box::Shader::Create("assets/shaders/texture.glsl"));
+		auto textureShader = m_ShaderLibrary.Load("assets/shaders/texture.glsl");
 
 		m_Texture = Box::Texture2D::Create("assets/textures/Checkerboard.png");
 		m_ChernoTexture = Box::Texture2D::Create("assets/textures/ChernoLogo.png");
 
-		std::dynamic_pointer_cast<Box::OpenGLShader>(m_TextureShader)->Bind();
-		std::dynamic_pointer_cast<Box::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
+		std::dynamic_pointer_cast<Box::OpenGLShader>(textureShader)->Bind();
+		std::dynamic_pointer_cast<Box::OpenGLShader>(textureShader)->UploadUniformInt("u_Texture", 0);
 	}
 
 	void OnUpdate(Box::TimeStep ts) override
@@ -186,11 +186,13 @@ public:
 			}
 		}
 
+		auto textureShader = m_ShaderLibrary.Get("texture");
+
 		m_Texture->Bind();
-		Box::Renderer::Submit(m_TextureShader, m_SquareVertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		Box::Renderer::Submit(textureShader, m_SquareVertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
 		m_ChernoTexture->Bind();
-		Box::Renderer::Submit(m_TextureShader, m_SquareVertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		Box::Renderer::Submit(textureShader, m_SquareVertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
 		// Triangle rendering
 		/*Box::Renderer::Submit(m_Shader, m_VertexArray);*/
@@ -228,10 +230,12 @@ public:
 	}
 
 private:
+	Box::ShaderLibrary m_ShaderLibrary;
+
 	Box::Ref<Box::Shader> m_Shader;
 	Box::Ref<Box::VertexArray> m_VertexArray;
 
-	Box::Ref<Box::Shader> m_FlatColorShader, m_TextureShader;
+	Box::Ref<Box::Shader> m_FlatColorShader;
 	Box::Ref<Box::VertexArray> m_SquareVertexArray;
 
 	Box::Ref<Box::Texture2D> m_Texture, m_ChernoTexture;
