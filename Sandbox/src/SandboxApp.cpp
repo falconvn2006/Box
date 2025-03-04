@@ -10,13 +10,13 @@ class ExampleLayer : public Box::Layer
 {
 public:
 	ExampleLayer()
-		: Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0.0f)
+		: Layer("Example"), m_CameraController((1280.0f / 720.0f), true)
 	{
 		m_VertexArray.reset(Box::VertexArray::Create());
 
 		// vertices[3dCords, verticesAmount]
 		// vertices index is import. It will render strictly by it
-
+		// Vertices of the triangle
 		float vertices[3 * 7] = {
 			-0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
 			0.5f, -0.5f, 0.0f, 0.2f, 0.3f, 0.8f, 1.0f,
@@ -142,33 +142,16 @@ public:
 
 	void OnUpdate(Box::TimeStep ts) override
 	{
+		m_CameraController.OnUpdate(ts);
+
 		/*BOX_TRACE("Delta time: {0}s ({1}ms)", ts.GetSeconds(), ts.GetMiliSeconds());*/
 		m_TimeStep = ts;
-
-		// Camera Controls
-		if (Box::Input::IsKeyPressed(BOX_KEY_LEFT))
-			m_CameraPosition.x -= m_CameraSpeed * ts;
-		else if (Box::Input::IsKeyPressed(BOX_KEY_RIGHT))
-			m_CameraPosition.x += m_CameraSpeed * ts;
-
-		if (Box::Input::IsKeyPressed(BOX_KEY_UP))
-			m_CameraPosition.y += m_CameraSpeed * ts;
-		else if (Box::Input::IsKeyPressed(BOX_KEY_DOWN))
-			m_CameraPosition.y -= m_CameraSpeed * ts;
-
-		if (Box::Input::IsKeyPressed(BOX_KEY_Q))
-			m_Rotation -= m_CameraRotationSpeed * ts;
-		else if (Box::Input::IsKeyPressed(BOX_KEY_E))
-			m_Rotation += m_CameraRotationSpeed * ts;
 
 		// Seting the background color
 		Box::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		Box::RenderCommand::Clear();
 
-		m_Camera.SetRotation(m_Rotation);
-		m_Camera.SetPosition(m_CameraPosition);
-
-		Box::Renderer::BeginScene(m_Camera);
+		Box::Renderer::BeginScene(m_CameraController.GetCamera());
 
 		static glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
@@ -198,9 +181,6 @@ public:
 		/*Box::Renderer::Submit(m_Shader, m_VertexArray);*/
 
 		Box::Renderer::EndScene();
-
-		if(m_Toogle)
-			m_Rotation += m_CameraRotationSpeed * 100;
 	}
 
 	void OnImGuiRender() override
@@ -216,17 +196,7 @@ public:
 
 	void OnEvent(Box::Event& event) override
 	{
-		if (event.GetEventType() == Box::EventType::KeyPressed)
-		{
-			Box::KeyPressedEvent& e = (Box::KeyPressedEvent&)event;
-			if (e.GetKeyCode() == BOX_KEY_P)
-			{
-				if (m_Toogle)
-					m_Toogle = false;
-				else
-					m_Toogle = true;
-			}
-		}
+		m_CameraController.OnEvent(event);
 	}
 
 private:
@@ -240,17 +210,9 @@ private:
 
 	Box::Ref<Box::Texture2D> m_Texture, m_ChernoTexture;
 
-	Box::OrthographicCamera m_Camera;
-	
-	glm::vec3 m_CameraPosition;
-	float m_Rotation = 0.0f;
-
-	float m_CameraSpeed = 5.0f;
-	float m_CameraRotationSpeed = 180.0f;
+	Box::OrthographicCameraController m_CameraController;
 
 	float m_TimeStep;
-
-	bool m_Toogle = false;
 
 	glm::vec3 m_SquareColor = { 0.2f, 0.3f, 0.8f };
 };

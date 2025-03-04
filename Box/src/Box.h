@@ -11,9 +11,11 @@
 #include "Box/Input.h"
 #include "Box/KeyCodes.h"
 #include "Box/MouseButtonCodes.h"
+#include "Box/OrthographicCameraController.h"
 
 #include "Box/ImGui/ImGuiLayer.h"
 
+//--------------- Renderer -----------------
 #include "Box/Renderer/Renderer.h"
 #include "Box/Renderer/RenderCommand.h"
 
@@ -23,6 +25,7 @@
 #include "Box/Renderer/Texture.h"
 
 #include "Box/Renderer/OrthographicCamera.h"
+//--------------- Renderer -----------------
 
 //--------------- Entry point -----------------
 
