@@ -39,6 +39,7 @@ namespace Box
 		}
 
 		m_Camera.SetPosition(m_CameraPosition);
+		m_CameraTranslationSpeed = m_ZoomLevel;
 	}
 
 	void OrthographicCameraController::OnEvent(Event& e)

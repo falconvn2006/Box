@@ -155,15 +155,23 @@ public:
 
 		static glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
-		std::dynamic_pointer_cast<Box::OpenGLShader>(m_FlatColorShader)->Bind();
-		std::dynamic_pointer_cast<Box::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat3("u_Color", m_SquareColor);
-
 		for (int y = 0; y < 20; y++)
 		{
 			for (int x = 0; x < 20; x++)
 			{
 				glm::vec3 position(x * 0.11f, y * 0.11f, 0.0f);
 				glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * scale;
+
+				if (y % 2 != 0 && x % 2 == 0)
+				{
+					std::dynamic_pointer_cast<Box::OpenGLShader>(m_FlatColorShader)->Bind();
+					std::dynamic_pointer_cast<Box::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat3("u_Color", m_SquareColor2);
+				}
+				else
+				{
+					std::dynamic_pointer_cast<Box::OpenGLShader>(m_FlatColorShader)->Bind();
+					std::dynamic_pointer_cast<Box::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat3("u_Color", m_SquareColor);
+				}
 
 				Box::Renderer::Submit(m_FlatColorShader, m_SquareVertexArray, transform);
 			}
@@ -215,6 +223,7 @@ private:
 	float m_TimeStep;
 
 	glm::vec3 m_SquareColor = { 0.2f, 0.3f, 0.8f };
+	glm::vec3 m_SquareColor2 = { 0.2f, 0.5f, 0.8f };
 };
 
 class Sandbox : public Box::Application
