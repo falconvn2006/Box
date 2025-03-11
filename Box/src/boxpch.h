@@ -13,7 +13,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "Box/Log.h"
+#include "Box/Core/Log.h"
 
 #ifdef BOX_PLATFORM_WINDOWS
 	#include <Windows.h>

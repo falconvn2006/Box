@@ -2,16 +2,16 @@
 
 // For easier header import for the Sandbox App
 
-#include "Box/Application.h"
-#include "Box/Layer.h"
-#include "Box/Log.h"
+#include "Box/Core/Application.h"
+#include "Box/Core/Layer.h"
+#include "Box/Core/Log.h"
 
 #include "Box/Core/Timestep.h"
 
-#include "Box/Input.h"
-#include "Box/KeyCodes.h"
-#include "Box/MouseButtonCodes.h"
-#include "Box/OrthographicCameraController.h"
+#include "Box/Core/Input.h"
+#include "Box/Core/KeyCodes.h"
+#include "Box/Core/MouseButtonCodes.h"
+#include "Box/Renderer/OrthographicCameraController.h"
 
 #include "Box/ImGui/ImGuiLayer.h"
 
@@ -29,6 +29,6 @@
 
 //--------------- Entry point -----------------
 
-#include "Box/Entrypoint.h"
+#include "Box/Core/Entrypoint.h"
 
 //--------------- Entry point -----------------

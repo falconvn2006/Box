@@ -1,8 +1,8 @@
 #include "boxpch.h"
 #include "Application.h"
 
-#include "Box/Log.h"
-#include "Box/Input.h"
+#include "Box/Core/Log.h"
+#include "Box/Core/Input.h"
 #include "Box/Renderer/Renderer.h"
 
 #include <GLFW/glfw3.h>

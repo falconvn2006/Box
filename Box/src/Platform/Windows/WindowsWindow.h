@@ -1,5 +1,5 @@
 #pragma once
-#include "Box/Window.h"
+#include "Box/Core/Window.h"
 #include "Box/Renderer/GraphicsContext.h"
 
 #include <GLFW/glfw3.h>

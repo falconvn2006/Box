@@ -1,8 +1,8 @@
 #include "boxpch.h"
 #include "OrthographicCameraController.h"
 
-#include "Box/Input.h"
-#include "Box/KeyCodes.h"
+#include "Box/Core/Input.h"
+#include "Box/Core/KeyCodes.h"
 
 namespace Box
 {

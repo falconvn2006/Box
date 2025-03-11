@@ -2,7 +2,7 @@
 #include "WindowsInput.h"
 
 #include <GLFW/glfw3.h>
-#include "Box/Application.h"
+#include "Box/Core/Application.h"
 
 namespace Box
 {

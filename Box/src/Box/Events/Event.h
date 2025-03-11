@@ -1,7 +1,7 @@
 #pragma once
 
 #include "boxpch.h"
-#include "Box/Core.h"
+#include "Box/Core/Core.h"
 
 namespace Box
 {

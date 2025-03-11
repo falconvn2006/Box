@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Box/Input.h"
+#include "Box/Core/Input.h"
 
 namespace Box
 {
