@@ -26,9 +26,3 @@
 
 #include "Box/Renderer/OrthographicCamera.h"
 //--------------- Renderer -----------------
-
-//--------------- Entry point -----------------
-
-#include "Box/Core/Entrypoint.h"
-
-//--------------- Entry point -----------------
