@@ -17,6 +17,7 @@
 
 //--------------- Renderer -----------------
 #include "Box/Renderer/Renderer.h"
+#include "Box/Renderer/Renderer2D.h"
 #include "Box/Renderer/RenderCommand.h"
 
 #include "Box/Renderer/Buffer.h"
