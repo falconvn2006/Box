@@ -1,8 +1,6 @@
 #include "Sandbox2D.h"
 #include <imgui/imgui.h>
 
-#include "Platform/OpenGL/OpenGLShader.h"
-
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
@@ -35,13 +33,10 @@ void Sandbox2D::OnUpdate(Box::TimeStep ts)
 
 	Box::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
-	Box::Renderer2D::DrawQuad({ 0.0f, 0.0f }, { 1.0f, 1.0f }, { 0.8f, 0.2f, 0.3f, 1.0f });
+	Box::Renderer2D::DrawQuad({ -1.0f, 0.0f }, { 0.8f, 0.8f }, { 0.8f, 0.2f, 0.3f, 1.0f });
+	Box::Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, { 0.2f, 0.3f, 0.8f, 1.0f });
 
 	Box::Renderer2D::EndScene();
-
-	// TODO: Add SetMat4, SetFloat4
-	//std::dynamic_pointer_cast<Box::OpenGLShader>(m_Shader)->Bind();
-	//std::dynamic_pointer_cast<Box::OpenGLShader>(m_Shader)->UploadUniformFloat4("u_Color", m_SquareColor);
 }
 
 void Sandbox2D::OnImGuiRender()
