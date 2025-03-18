@@ -20,6 +20,7 @@ private:
 	float m_TimeStep;
 
 	// Temp
+	Box::Ref<Box::Texture2D> m_CheckerboardTexture;
 	Box::Ref<Box::VertexArray> m_SquareVertexArray;
 	Box::Ref<Box::Shader> m_Shader;
 	glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
